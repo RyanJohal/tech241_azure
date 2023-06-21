@@ -6,7 +6,7 @@
 5. Make ssh folder using mkdir .ssh (git bash)
 6. Use command: ssh-keygen -t rsa -b 4096 -C "personal email" (git bash)
 7. Enter file to save key: tech241-ryan-az-key (git bash)
-8. Access key: cat tech241-ramon-az-key.pub (git bash)
+8. Access key public: cat tech241-ryan-az-key.pub (git bash)
 9. Create ssh key in Azure: paste existing key (Azure)
 10. Create virtual machine in azure: Security type standard, Image Ubuntu Server 18.04 LTS. Size standard_B1s. Username adminuser. Stored keys tech241-ryan-az-key. Inbound ports SSH and HTTP.
 11. Click connect on virtual machine page (azure): chmod 400 <keyname>
