@@ -47,7 +47,8 @@
 46. head -2 <file_name> To display first 2 lines of the file
 47. tail -2 <file_name> To display last 2 lines of the file
 48. nl <file_name>      To add numbers to the lines
-49. curl                Tool to transfer data to and from a server
+49. curl                
+50. Tool to transfer data to and from a server
 
 # Managing file ownership
 ### Why is managing file ownership important?
