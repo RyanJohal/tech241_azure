@@ -26,6 +26,42 @@
 | `export`  | Creates an enviroment variable                                     |
 | `source`  | Used to reload the .bashrc file                                    |
 
+
+cat file | grep word - Shows all lines with word in existing file
+
+
+sudo apt install tree - install file tree
+
+
+sudo apt update -y update all sources -y yes to everything
+
+
+cp file name new file name - copy file
+
+
+mv file name ~ - Move file to home directory 
+
+
+rm -r Remove everything in folder recursive
+
+
+VARIABLENAME=variablevalue - Make standard variable
+
+
+export VARIABLENAME=variablevalue - make environment variable
+
+
+printenv shows all environment variables
+
+
+.bashrc - make environment variable in this folder to make it persistent
+
+
+ps - show user process
+
+
+ps aux - show all processes in detail
+
 # nginx script
 ### !/bin/bash
 
