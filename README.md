@@ -36,3 +36,39 @@ A virtual machine includes a virtualised hardware environment (processor, memory
 To orchestrate and run virtual machines, specialised software called a hypervisor or virtual machine monitor (VMM) is required. Examples include VMware vSphere, Microsoft Hyper-V, and KVM (Kernel-based Virtual Machine).
 ### What is the importance of an image when creating an VM?
 An image is a preconfigured software template or snapshot that contains the necessary files and settings to create a virtual machine. It serves as a blueprint for the VM's initial state and enables easy deployment and replication of virtual machines.
+
+
+# VM Diagram
+![Alt text](<MicrosoftTeams-image (3).png>)
+### Annotations
+Region - Where everything lives
+
+
+Resource Group - like a container to organise everything
+
+
+Virtual network (VNET) - Like a house (Structure)
+
+
+Subnet - Like a room inside a house
+
+
+Virtual machine (VM) - Like a computer device within a room
+
+
+E Disk - Store the files for VM
+
+
+Network Interface Controller (NIC) - Communicate with the computer through this
+
+
+Public IP - Your public address
+
+
+Network Security Group (NSG) - Like the security system on the computer
+
+
+NSG rule HTTP/SSH - Rules to decide what type of people (traffic) can access the computer
+
+
+.SSH key - like a padlock on the computer
