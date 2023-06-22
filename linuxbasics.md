@@ -16,7 +16,7 @@
 15. ls -a               Show hidden files
 16. cd .                Current directory
 17. cd ..               Parent directory
-18. cd root             Root directory
+18. cd              Root directory
 19. cd home             Home directory 
 20. cat > file1         To create a new file
 21. cat file1           To read the contents of the named file
@@ -24,7 +24,7 @@
 23. cat file1 file2 >new To copy contents of file1 and file2 to newfile
 24. tac new             To read the content upside down(last line first and then all others in descending order)
 25. cat file2 > file1   To copy content of file2 to file1 (content of file1 gets overwritten)
-26. touch file4 file5   To create new file/s- file3, file4 and file5 , to change all timestamp or update only access time or modify time of a file
+26. touch               To create new file/s
 27. stat                To check the time stampfile (access time, modify time of a file)
 28. stat -a             To check the access time of any file
 29. vi <file_name>      To create a file with VI/VIM editor , press ESC and then :wq
