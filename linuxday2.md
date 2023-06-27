@@ -143,3 +143,57 @@ kill -9 <PID>                   To kill with brute force
 2. Add import rule to allow port 27017
 3. npm start
 4. npm install
+
+```linux
+# Starting sparta app with script
+#!/bin/bash
+
+# update
+sudo apt update -y
+
+
+# upgrade
+sudo apt upgrade -y
+
+
+# install nginx
+sudo apt install nginx -y
+
+
+# restart nginx
+sudo systemctl restart nginx
+
+
+# enable nginx - will auto start on reboot
+sudo systemctl enable nginx
+
+
+# access correct node source
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+
+
+# add in env
+export DB_HOST=mongodb://172.187.178.145:27017/posts
+
+
+# install node.js
+sudo apt install nodejs -y
+
+
+# run app in background
+sudo npm install -g pm2
+
+
+# enable node.js - will auto start on reboot
+sudo systemctl enable nodejs
+
+
+# copy app folder
+git clone https://github.com/RyanJohal/tech241_sparta_app.git app
+
+
+# Run app in the background using PM2
+cd /home/adminuser/app/app2
+pm2 start app.js --name "sparta app"
+
+```
