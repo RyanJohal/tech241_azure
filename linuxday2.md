@@ -93,7 +93,7 @@ rm -rf <file_name>              To delete the named file/folder forcefully and r
 
 1. curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 2. To install node.js on your local Ubuntu Linux machine - sudo apt install nodejs -y 
-3. pm helps run apps in the background (PM2 is an advanced process manager for running Node.js applications. That provides an easier option to automate a Node.js application.) - sudo npm install pm2 -g
+3. pm helps run apps in the background (PM2 is an advanced process manager for running Node.js applications. That provides an easier option to automate a Node.js application.) - sudo npm install pm2 -y
 4. cd tech241_sparta_app/
 5. save any specified packages into dependencies by default - npm install
 node app.js                         Node.js is a platform for building fast and scalable server applications using JavaScript. Node.js is the runtime and npm is the Package Manager for Node.js modules
