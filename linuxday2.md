@@ -24,10 +24,8 @@
 | `printenv`| Prints the enviroment variables                                    |
 | `echo`    | Prints a file or string                                            |
 | `export`  | Creates an enviroment variable                                     |
-| `source`  | Used to reload the .bashrc file                                    |
-
-
-cat file | grep word - Shows all lines with word in existing file
+| `source`  | Used to reload the .bashrc file                                    | 
+|cat file   | grep word - Shows all lines with word in existing file
 
 
 sudo apt install tree - install file tree
@@ -62,7 +60,7 @@ ps - show user process
 
 ps aux - show all processes in detail
 
-
+rm -rf <file_name>              To delete the named file/folder forcefully and recursively.
 
 # nginx script
 ### !/bin/bash
@@ -87,9 +85,9 @@ sudo systemctl restart nginx
 ### enable nginx - will auto start on reboot
 sudo systemctl enable nginx
 
- # Access sparta app via node.js
+
+# Access sparta app via node.js
  ### Steps to access the Sparta_App using nodejs #####
-rm -rf <file_name>              To delete the named file/folder forcefully and recursively.
 
 1. curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 2. To install node.js on your local Ubuntu Linux machine - sudo apt install nodejs -y 
@@ -97,8 +95,8 @@ rm -rf <file_name>              To delete the named file/folder forcefully and r
 4. cd tech241_sparta_app/
 5. save any specified packages into dependencies by default - npm install
 node app.js                         Node.js is a platform for building fast and scalable server applications using JavaScript. Node.js is the runtime and npm is the Package Manager for Node.js modules
-6. Go to azure networking and add port 3000 and TCP so that you can access the sparta_app.
-7. ctrl C exit securely
+1. Go to azure networking and add port 3000 and TCP so that you can access the sparta_app.
+2. ctrl C exit securely
 ctrl  z                        is used to suspend a process. (This means that the program or command you are running will be temporarily halted and put in the background, taking up no resources. This can be useful if you need to free up RAM or CPU cycles for other tasks.)
 
 
@@ -145,8 +143,8 @@ kill -9 <PID>                   To kill with brute force
 4. npm install
 <<<<<<< HEAD
 
-```linux
 # Starting sparta app with script
+```linux
 #!/bin/bash
 
 # update
@@ -165,6 +163,10 @@ sudo apt install nginx -y
 sudo systemctl restart nginx
 
 
+# status nginx
+sudo systemctl status nginx
+
+
 # enable nginx - will auto start on reboot
 sudo systemctl enable nginx
 
@@ -174,29 +176,90 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 
 # add in env
-export DB_HOST=mongodb://172.187.178.145:27017/posts
+export DB_HOST=mongodb://172.187.177.225:27017/posts
 
 
 # install node.js
 sudo apt install nodejs -y
 
 
-# run app in background
+# install pm2
 sudo npm install -g pm2
-
-
-# enable node.js - will auto start on reboot
-sudo systemctl enable nodejs
 
 
 # copy app folder
 git clone https://github.com/RyanJohal/tech241_sparta_app.git app
 
 
-# Run app in the background using PM2
+# cd into app folder
 cd /home/adminuser/app/app2
+
+
+# install node js in folder
+npm install -y
+
+
+# Run app in the background using PM2
 pm2 start app.js --name "sparta app"
 
+
+
+
+
+
+# To run the app in the background with &
+nohup npm start &
+# nohup prevents the process from being terminated when terminal session ends, doesn't engage terminal, it always changes process ID so you need to kill previous command to run it again. Doesn't run again as port is in use.
 ```
-=======
->>>>>>> a1de209867c5548676c0cd627482e93036b4f75a
+
+# Automating the configuration of mongodb ready for app vm
+```linux
+#!/bin/bash
+
+
+# Update
+sudo apt update -y
+
+#Upgrade
+sudo apt upgrade -y
+
+# install mongo db
+wget -qO - hyyps://www.momgodb.org/static/pgp/server-3.2.asc | sudo apt-key add -
+
+echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+sudo apt update -y
+
+sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
+
+
+# configure bindIp 0.0.0.0
+sudo sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/g' /etc/mongod.conf
+
+
+# Restart mongo db
+sudo systemctl restart mongod
+
+
+# enable mongo db
+sudo systemctl enable mongod
+
+# status mongo db
+sudo systemctl status mongod
+
+
+```
+# Manually using reverse proxy to redirect to port 3000
+```linux
+# got nginx config file and edit location
+sudo nano /etc/nginx/sites-available/default
+
+# change location try_files line to:
+proxy_pass http://localhost:3000;
+
+```
+# Putting the reverse proxy in the script
+```
+# Change nginx config
+sudo sed -i 's|try_files $uri $uri/ =404;|proxy_pass http://localhost:3000;|' /etc/nginx/sites-available/default
+```
