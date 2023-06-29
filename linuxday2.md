@@ -144,6 +144,7 @@ kill -9 <PID>                   To kill with brute force
 <<<<<<< HEAD
 
 # Starting sparta app with script
+Installing nginx, access node js and installing it, creating env variable to connect to db vm, using git clone to download app folder and then starting app within that folder.
 ```linux
 #!/bin/bash
 
@@ -213,6 +214,7 @@ nohup npm start &
 ```
 
 # Automating the configuration of mongodb ready for app vm
+Installs mongodb database and changes bind ip to 0.0.0.0 so that VMs other than this one can communicate with it.
 ```linux
 #!/bin/bash
 
@@ -249,17 +251,10 @@ sudo systemctl status mongod
 
 
 ```
-# Manually using reverse proxy to redirect to port 3000
-```linux
-# got nginx config file and edit location
-sudo nano /etc/nginx/sites-available/default
-
-# change location try_files line to:
-proxy_pass http://localhost:3000;
-
-```
 # Putting the reverse proxy in the script
+Place above nginx restart and under install so that the changes can come into place.
 ```
 # Change nginx config
 sudo sed -i 's|try_files $uri $uri/ =404;|proxy_pass http://localhost:3000;|' /etc/nginx/sites-available/default
 ```
+
