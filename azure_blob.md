@@ -48,4 +48,17 @@ Blob is the file.
 4. Change image access on azure portal
 5. Upload blob file to app - <img src="https://tech241ryanstorage.blob.core.windows.net/testcontainer/catupload.jpg" alt="Cat Image">
 
+# Steps to creating a blob file on azure via CLI
+1. az login - log into azure via cli
+2. az storage account create --name tech241ryanstorage --resource-group tech241 --location uksouth --sku Standard_LRS   - This creates a storage account on azure
+3. az storage account list --resource-group tech241      - This is to test whether the account has been made by listing the storage accounts within that list.
+4. az storage account list --resource-group tech241 --query "[].{Name:name, Location:location, Kind:kind}" --output table   - organsied table output of previous command
+5. az storage container create --account-name tech241ryanstorage --name testcontainer - creating container within 
+6. az storage blob upload --account-name tech241ryanstorage --container-name testcontainer --name newname.txt --file test.txt --auth-mode login       - Upload blob file
+7.  az storage blob list --account-name tech241ryanstorage --container-name testcontainer --output table --auth-mode login         - Checking if blob file is there through a table
+
+
+
+
+
 
