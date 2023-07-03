@@ -16,7 +16,7 @@
 15. ls -a               Show hidden files
 16. cd .                Current directory
 17. cd ..               Parent directory
-18. cd              Root directory
+18. cd                 home directory
 19. cd home             Home directory 
 20. cat > file1         To create a new file
 21. cat file1           To read the contents of the named file

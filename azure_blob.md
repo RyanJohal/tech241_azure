@@ -29,6 +29,24 @@ Container organises the blobs.
 Blob is the file.
 
 # Types of redundancy
+![Alt text](azure-storage-replication-options.png)
+
+LRS (Locally Redundant Storage): Replicates data within a single data center in a region, offering no redundancy across multiple data centers.
+
+
+ZRS (Zone-Redundant Storage): Replicates data across multiple data centers within a region, providing higher availability compared to LRS.
+
+
+GRS (Geo-Redundant Storage): Replicates data synchronously across data centers in a primary region and asynchronously copies it to a secondary region, offering better protection against regional disasters.
+
+
+RA-GRS (Read-Access Geo-Redundant Storage): Provides the same functionality as GRS but allows read access to the data in the secondary region, enabling load balancing and disaster recovery scenarios.
+
+
+GZRS (Geo-Zone Redundant Storage): Combines the benefits of ZRS and GRS, replicating data across data centers within a primary region and asynchronously to a secondary region.
+
+
+RA-GZRS (Read-Access Geo-Zone Redundant Storage): Combines the capabilities of ZRS, GRS, and RA-GRS, offering high availability, durability, and read access across multiple regions.
 
 |   LRS   |   ZRS   |   GRS   |  RA-GRS  |  GZRS   | RA-GZRS |
 |:-------:|:-------:|:-------:|:--------:|:-------:|:------:|
@@ -57,7 +75,7 @@ Blob is the file.
 6. az storage blob upload --account-name tech241ryanstorage --container-name testcontainer --name newname.txt --file test.txt --auth-mode login       - Upload blob file
 7.  az storage blob list --account-name tech241ryanstorage --container-name testcontainer --output table --auth-mode login         - Checking if blob file is there through a table
 
-
+ 
 
 
 

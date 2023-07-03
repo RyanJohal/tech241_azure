@@ -218,37 +218,55 @@ Installs mongodb database and changes bind ip to 0.0.0.0 so that VMs other than 
 ```linux
 #!/bin/bash
 
+ 
 
-# Update
+# update
 sudo apt update -y
 
-#Upgrade
+ 
+
+# upgrade
 sudo apt upgrade -y
 
-# install mongo db
-wget -qO - hyyps://www.momgodb.org/static/pgp/server-3.2.asc | sudo apt-key add -
+ 
 
+# download key for the right version
+wget -qO - https://www.mongodb.org/static/pgp/server-3.2.asc | sudo apt-key add -
+
+ 
+
+# source list - specify mongo db version
 echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
+ 
+
+# update again
 sudo apt update -y
 
+ 
+
+# install mongo db
 sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
 
+ 
 
-# configure bindIp 0.0.0.0
+# configure bindip to 0.0.0.0
 sudo sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/g' /etc/mongod.conf
 
+ 
 
-# Restart mongo db
+# start mongo db
 sudo systemctl restart mongod
 
+ 
+
+# check the status
+sudo systemctl status mongod
+
+ 
 
 # enable mongo db
 sudo systemctl enable mongod
-
-# status mongo db
-sudo systemctl status mongod
-
 
 ```
 # Putting the reverse proxy in the script
