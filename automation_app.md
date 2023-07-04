@@ -66,16 +66,20 @@ sudo apt upgrade -y
 sudo apt install nginx -y
 
 
-# restart nginx
-sudo systemctl restart nginx
-
-
 # status nginx
 sudo systemctl status nginx
 
 
 # enable nginx - will auto start on reboot
 sudo systemctl enable nginx
+
+
+# install sed
+sudo apt install sed -y
+
+
+# Change nginx config
+sudo sed -i 's|try_files $uri $uri/ =404;|proxy_pass http://localhost:3000;|' /etc/nginx/sites-available/default
 
 
 # access correct node source
@@ -99,7 +103,7 @@ git clone https://github.com/RyanJohal/tech241_sparta_app.git app
 
 
 # cd into app folder
-cd /home/adminuser/app/app2
+cd app
 
 
 # install node js in folder
@@ -112,9 +116,21 @@ pm2 start app.js --name "sparta app"
 
 
 
-
-
-# To run the app in the background with &
-nohup npm start &
-# nohup prevents the process from being terminated when terminal session ends, doesn't engage terminal, it always changes process ID so you need to kill previous command to run it again. Doesn't run again as port is in use.
 ```
+
+# DB script
+
+## Command Descriptions
+
+1. `sudo apt update -y`: Updates the package lists for upgrades and installations.
+2. `sudo apt upgrade -y`: Upgrades installed packages to their latest versions.
+3. `wget -qO - https://www.mongodb.org/static/pgp/server-3.2.asc | sudo apt-key add -`: Downloads the GPG key for the MongoDB repository and adds it to the system's trusted key list.
+4. `echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list`: Adds the MongoDB repository to the system's package sources list.
+5. `sudo apt update -y`: Updates the package lists again after adding the MongoDB repository.
+6. `sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20`: Installs specific versions (3.2.20) of MongoDB packages.
+7. `sudo sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/g' /etc/mongod.conf`: Modifies the MongoDB configuration file (`/etc/mongod.conf`) to bind MongoDB to all available network interfaces (`0.0.0.0`) instead of just localhost.
+8. `sudo systemctl restart mongod`: Restarts the MongoDB service to apply the new configuration.
+9. `sudo systemctl status mongod`: Checks the status of the MongoDB service.
+10. `sudo systemctl enable mongod`: Enables the MongoDB service to start automatically on system boot.
+
+These commands are used to update, upgrade, install MongoDB 3.2.20, configure its network binding, restart the service, and enable it to start on system boot.
