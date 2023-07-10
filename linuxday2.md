@@ -148,6 +148,7 @@ Installing nginx, access node js and installing it, creating env variable to con
 ```linux
 #!/bin/bash
 
+
 # update
 sudo apt update -y
 
@@ -160,54 +161,66 @@ sudo apt upgrade -y
 sudo apt install nginx -y
 
 
-# restart nginx
-sudo systemctl restart nginx
-
-
-# status nginx
-sudo systemctl status nginx
-
-
-# enable nginx - will auto start on reboot
+# enable nginx
 sudo systemctl enable nginx
 
 
-# access correct node source
+# installing sed
+sudo apt install sed
+
+
+# setup nginx as a reverse proxy
+sudo sed -i 's@try_files .*;@proxy_pass http://localhost:3000;@' /etc/nginx/sites-available/default
+
+
+# restart nginx again
+sudo systemctl restart nginx
+
+
+# get from url needed version of node
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 
-# add in env
-export DB_HOST=mongodb://172.187.177.225:27017/posts
+# install nodejs
+sudo apt install -y nodejs
 
 
-# install node.js
-sudo apt install nodejs -y
+#installing pm2 that helps run apps in the background
+sudo npm install pm2 -g
 
 
-# install pm2
-sudo npm install -g pm2
+# getting app folder to the VM
+git clone https://github.com/RyanJohal/tech241_sparta_app repo
 
 
-# copy app folder
-git clone https://github.com/RyanJohal/tech241_sparta_app.git app
+#getting inside app folder
+cd repo/app
 
 
-# cd into app folder
-cd /home/adminuser/app/app2
+#Creating DB_HOST env variable
+export DB_HOST=mongodb://172.31.38.156:27017/posts
 
 
-# install node js in folder
-npm install -y
+# installing the app
+npm install
 
 
-# Run app in the background using PM2
-pm2 start app.js --name "sparta app"
+# populates database in case there are no posts
+node seeds/seed.js
+
+
+# kills previous background processes
+pm2 kill
+
+
+# starting the app
+pm2 start app.js  
+
+```
 
 
 
-
-
-
+```
 # To run the app in the background with &
 nohup npm start &
 # nohup prevents the process from being terminated when terminal session ends, doesn't engage terminal, it always changes process ID so you need to kill previous command to run it again. Doesn't run again as port is in use.
