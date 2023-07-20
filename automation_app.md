@@ -81,6 +81,7 @@ sudo apt install sed -y
 # Change nginx config
 sudo sed -i 's|try_files $uri $uri/ =404;|proxy_pass http://localhost:3000;|' /etc/nginx/sites-available/default
 
+sudo systemctl restart nginx
 
 # access correct node source
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
@@ -103,7 +104,7 @@ git clone https://github.com/RyanJohal/tech241_sparta_app.git app
 
 
 # cd into app folder
-cd app
+cd app/app
 
 
 # install node js in folder
