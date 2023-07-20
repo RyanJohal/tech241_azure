@@ -88,7 +88,7 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 
 # add in env
-export DB_HOST=mongodb://172.187.177.225:27017/posts
+export DB_HOST=mongodb://172.31.35.56:27017/posts
 
 
 # install node.js
@@ -110,6 +110,14 @@ cd app/app
 # install node js in folder
 npm install -y
 
+# seed batabase
+echo "Clearing and seeding database.."
+node seeds/seed.js
+echo " --> Done!"
+ 
+
+# kill previous app background process
+pm2 kills
 
 # Run app in the background using PM2
 pm2 start app.js --name "sparta app"
